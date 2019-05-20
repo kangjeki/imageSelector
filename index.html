@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JC Image Selector</title>
+	<style type="text/css">
+		body {
+			margin: 0; padding: 0;
+			 -webkit-touch-callout: none;
+		    -webkit-user-select: none;
+		    -khtml-user-select: none;
+		    -moz-user-select: none;
+		    -ms-user-select: none;
+		    user-select: none;
+		}
+	</style>
+	<style>
+		#container {
+			margin: 0; padding: 10px;
+			background: #eee;
+			text-align: center;
+		}
+		input {
+			width: 50px;
+		}
+		input#input {
+			width: 200px;
+		}
+		#outer {
+			margin: 0; padding: 10px;
+			text-align: center;
+		}
+	</style>
+	<script src="js/jc_imageSelector.js"></script>
+</head>
+<body>
+<div id="container">
+	<a href="document.html">Documentation</a>
+	<br><br>
+	<input id="input" type="file" name="">
+	<br><br>
+
+	<label>Coord X :</label>
+	<input type="text" id="x">
+	<label>Coord Y :</label>
+	<input type="text" id="y">
+
+	<label>Width :</label>
+	<input type="text" id="width">
+	<label>Height :</label>
+	<input type="text" id="height">
+</div>
+
+<br>
+<div id="outer">
+	<img id="image" src="">	
+</div>
+
+<script type="text/javascript">
+
+let input 	= document.querySelector('#input'),
+	img 	= document.querySelector('#image');
+
+// let select 	= new JCselector(img, input, false, (imgRes) => {
+// 	img.src = imgRes;
+// });
+
+let select 	= new JCselector(img, input, myRes, imgRes);
+
+function myRes(res) {
+	//console.log(res.width);
+	document.querySelector('#x').value = res.x;
+	document.querySelector('#y').value = res.y;
+	document.querySelector('#width').value = res.width;
+	document.querySelector('#height').value = res.height;
+}
+
+function imgRes(src) {
+	img.src = src;
+}
+
+select.on();
+
+</script>
+</body>
+</html>

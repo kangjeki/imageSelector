@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Doc JC Image Selector</title>
+  <style type="text/css">
+    body {
+      margin: 0; padding: 0;
+    }
+    header {
+      margin: 0; padding: 5px; background: #453286;
+      color: #fff;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0; padding: 0;
+      font-size: 20px;
+    }
+    header h4 {
+      margin: 0; padding: 0;
+      font-size: 15px;
+    }
+    .head_fix {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    }
+    .uri {
+      margin: 0; padding: 5px 10px; text-decoration: none;
+      background: #453286; color: #fff;
+      border: 1px #453286 solid; border-radius: 5px;
+      font-family: arial; font-size: 15px;
+    }
+    .uri:hover {
+      background: #6934CA; cursor: pointer;
+    }
+    #container {
+      margin: 0; padding: 20px;
+    }
+    #doc {
+      margin: 0; padding: 5px;
+      text-align: center;
+    }
+    #prev {
+      margin: 0; padding: 0;
+      text-align: center;
+    }
+    #prev img {
+      margin: 0; padding: 0; width: 500px;
+      border: 1px #ddd solid;
+    }
+    xmp {
+      margin: 0; padding: 2px;
+      background: #eee;
+      color: #606060;
+      border-left: 5px green solid;
+    }
+    #footer {
+      margin: 0; padding: 20px; background: #333;
+      color: #fff; text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>JC Image Selector</h1>
+  <h4>Documentation</h4>
+</header>
+<div id="container">
+<div id="doc">
+<b>jc_imageSelector</b> <br>
+Javascript Simple Image Selector<br>
+include Javascript file jc_imageSelector.js and enjoy  
+<br><br>
+<a href="index.html" class="uri">Get Started</a> 
+</div>
+
+<br>
+
+<div id="prev">
+  <img src="preview.png" alt="jc_imageSelector" title="jc_imageSelector">  
+</div>
+
+<br>
+<b># Intro</b><br>
+include js File on head
+
+<code>
+<xmp>
+  <script src="js/jc_imageSelector.js"></script>
+
+</xmp>
+</code>
+<br>
+<b># APIs</b>
+<b>Parameter</b>
+
+<code>
+<xmp>
+  new JCselector( /Element Target/, /Input File/, /callback Coordinate and Size/, /callback URL img crop/);
+
+</xmp>
+</code>
+<br>
+
+* Element Target      = "IMG Tag target Selector and Preview".<br>
+* Input File          = "Input File to select image".<br>
+* Callback Coordinate = "callback function auto Response Coordinate and Size /x, y, width, height/".<br>
+* Callback URL        = "callback function Response rendered image URL /base64/".<br>
+
+<br>
+<b>Parameter Example</b><br>
+<code>
+<xmp>
+  let select  = new JCselector(img, input, myRes, imgRes);
+
+</xmp>
+</code>
+<br>
+<p>And To Active Function Selector you must be add</p>
+<code>
+<xmp>
+  select.on();
+
+</xmp>
+</code>
+
+<br>
+<p>
+  if you want to select coordinate and size only
+</p>
+<code>
+<xmp>
+  let select  = new JCselector(img, input, myRes, false);
+
+</xmp>
+</code>
+<br>
+
+<p>
+  or you want to select croper only, you cant replace URL callback with boolean true-false or actived the function;
+</p>
+<code>
+<xmp>
+  let select  = new JCselector(img, input, false, imgRes);
+
+</xmp>
+</code>
+<br>
+<hr>
+<br>
+<b># Example 1</b>
+<code>
+<xmp>
+  let select  = new JCselector(img, input, false, true);
+  select.on();
+
+</xmp>
+</code>
+<br><br>
+
+<b># Example 2</b>
+<p>Arrow Mode</p>
+<code>
+<xmp>
+  let select  = new JCselector(img, input, false, (resUrl) => {
+    document.getElementById('out-image').src = resUrl;
+  });
+  select.on();
+
+</xmp>
+</code>
+<br><br>
+
+<b># Example 3</b>
+<p>Arrow Mode</p>
+<p>Coordinate and Size Response (x, y, width, height)</p>
+<code>
+<xmp>
+  let select  = new JCselector(img, input, (res) => {
+    document.getElementById('x').src = res.x;
+    document.getElementById('y').src = res.y;
+    document.getElementById('width').src = res.width;
+    document.getElementById('height').src = res.eight;
+  }, false);
+  select.on();
+
+</xmp>
+</code>
+<br><br>
+
+<b># Full Example </b>
+<br>
+<code>
+<xmp>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JC Image Selector</title>
+  <script src="js/jc_imageSelector.js"></script>
+</head>
+<body>
+  <input id="input" type="file" name="">
+  <br><br>
+
+  <label>Coord X :</label>
+  <input type="text" id="x">
+  <label>Coord Y :</label>
+  <input type="text" id="y">
+
+  <label>Width :</label>
+  <input type="text" id="width">
+  <label>Height :</label>
+  <input type="text" id="height">
+  <br>
+
+<img id="image" src=""> 
+
+
+<script type="text/javascript">
+
+let input = document.querySelector('#input'),
+  img     = document.querySelector('#image');
+
+let select  = new JCselector(img, input, myRes, imgRes);
+
+function myRes(res) {
+  document.querySelector('#x').value = res.x;
+  document.querySelector('#y').value = res.y;
+  document.querySelector('#width').value = res.width;
+  document.querySelector('#height').value = res.height;
+}
+
+function imgRes(src) {
+  img.src = src;
+}
+
+select.on();
+
+</script>
+</body>
+</html>
+</xmp>
+
+</code>
+
+</div>
+<br>
+<div id="footer">
+Author: JC Programs
+</div>
+
+<script type="text/javascript">
+  let head = document.querySelector('header');
+  window.onscroll = () => {
+    if ( window.pageYOffset > head.offsetTop ) {
+      head.classList.add('head_fix');
+    }
+    else if ( window.pageYOffset == 0 ) {
+      head.classList.remove('head_fix');
+    }
+  };
+</script>
+</body>
+</html>
