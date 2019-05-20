@@ -550,7 +550,7 @@ class JCselector {
 										$('._jc_Selector_').remove();
 										objectSelector = false;
 									}
-									else if (imgRes !== true) {
+									else if (imgRes == true) {
 										const 	imgN 	= new Image();
 												imgN.src = uri;
 										$('body').appendChild(imgN);
