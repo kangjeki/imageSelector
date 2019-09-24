@@ -58,7 +58,7 @@ Coordinate and Size Response (x, y, width, height)
       document.getElementById('x').src = res.x;
       document.getElementById('y').src = res.y;
       document.getElementById('width').src = res.width;
-      document.getElementById('height').src = res.eight;
+      document.getElementById('height').src = res.height;
     }, false);
     select.on();
 
