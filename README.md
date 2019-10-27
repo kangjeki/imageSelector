@@ -33,7 +33,7 @@ if you want to select coordinate and size only
 
     let select  = new JCselector(img, input, myRes, false);
 
-or you want to select croper only, you cant replace URL callback with boolean true-false or actived the function;
+or you want to select croper only, you can replace URL callback with boolean true-false or actived the function;
 
     let select  = new JCselector(img, input, false, imgRes);
 
