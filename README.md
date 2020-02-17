@@ -1,4 +1,4 @@
-# JC Image Selector</h1>
+# Image Selector</h1>
 
 Javascript Simple Image Selector<br>
 include Javascript file jc_imageSelector.js and enjoy  
